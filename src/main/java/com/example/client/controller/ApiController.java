@@ -33,4 +33,9 @@ public class ApiController {
     public ResponseEntity exchange() {
         return restTemplateService.exchange();
     }
+
+    @GetMapping("/naver")
+    public ResponseEntity naver() {
+        return restTemplateService.naver();
+    }
 }

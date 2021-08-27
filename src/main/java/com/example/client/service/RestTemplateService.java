@@ -98,4 +98,33 @@ public class RestTemplateService {
 
         return response;
     }
+
+    public ResponseEntity naver(){
+        URI uri = UriComponentsBuilder
+                .fromUriString("https://openapi.naver.com")
+                .path("/v1/search/local.json")
+                .queryParam("query","%EC%A3%BC%EC%8B%9D")
+                .queryParam("display","10")
+                .queryParam("start","1")
+                .queryParam("sort","random")
+                .encode()
+                .build()
+                .toUri();
+        log.info("uri : {}", uri);
+
+        RequestEntity<Void> req = RequestEntity
+                .get(uri)
+                .header("X-Naver-Client-Id","Zi3o1uQftp59zuIqEAz4")
+                .header("X-Naver-Client-Secret","iy6YKSWpLM")
+                .build();
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(req, new ParameterizedTypeReference<>(){});
+        log.info("{}",response.getStatusCode());
+        log.info("{}",response.getHeaders());
+        log.info("{}",response.getBody());
+
+        return response;
+    }
+
 }
